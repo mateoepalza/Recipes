@@ -1,0 +1,60 @@
+<div class="row">
+    <div class="col-xs-12 col-md-6 col-md-offset-3">
+        <!--
+            We check if the error property exists, in case it exists
+            we display an error message
+        -->
+        <!--<div class="alert alert-danger" *ngIf="error">
+            <p>{{ error }}</p>
+        </div>-->
+        <!--
+            In here we are listening to the close property created on the alert component
+            and then we call the "onHandleError()" method
+        -->
+        <app-alert [message]="error" *ngIf="error" (close)="onHandleError()">
+        </app-alert>
+        <!--
+            Here we show our spinner component if the page is loading
+            -> Be aware that our spinner is the shared folder
+        -->
+        <div *ngIf="isLoading" style="text-align: center;">
+            <app-loading-spinner></app-loading-spinner>
+        </div>
+        <!--
+            In here we are showing the form if the isLoading property is set to false
+        -->
+        <form #authForm="ngForm" (ngSubmit)="onSubmit(authForm)" *ngIf="!isLoading">
+            <div class="form-group">
+                <label for="email">E-mail</label>
+                <input 
+                    type="email" 
+                    class="form-control" 
+                    id="email" 
+                    ngModel 
+                    name="email" 
+                    required 
+                    email>
+            </div>
+            <div class="form-group">
+                <label for="pass">Password</label>
+                <input 
+                    type="password" 
+                    class="form-control" 
+                    id="pass" 
+                    ngModel 
+                    name="password" 
+                    required 
+                    minlength="6">
+            </div>
+            <div class="form-group">
+                <button 
+                    class="btn btn-primary" 
+                    type="submit" 
+                    [disabled]="!authForm.valid">{{ isLoginMode ? 'Login': 'Sign Up' }}</button>
+            </div>
+            <div class="form-group">
+                <button class="btn btn-primary" (click)="onSwitchMode()" type="button">Switch to {{ isLoginMode ? 'Sign Up' : 'Login'}}</button>
+            </div>
+        </form>
+    </div>
+</div>
