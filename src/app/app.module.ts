@@ -1,68 +1,52 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
-import { RecipesComponent } from './recipes/recipes.component';
-import { RecipeListComponent } from './recipes/recipe-list/recipe-list.component';
-import { RecipeDetailComponent } from './recipes/recipe-detail/recipe-detail.component';
-import { RecipeItemComponent } from './recipes/recipe-list/recipe-item/recipe-item.component';
-import { ShoppingListComponent } from './shopping-list/shopping-list.component';
-import { ShoppingEditComponent } from './shopping-list/shopping-edit/shopping-edit.component';
-import { DropdownDirective } from './shared/dropdown.directive';
-import { ShoppingListService } from './shopping-list/shopping-list.service';
 import { AppRoutingModule } from './app-routing.module';
-import { ResolverService } from './recipes/recipe-detail/resolver.service';
-import { RecipeService } from './recipes/recipe.service';
-import { RecipeStartComponent } from './recipes/recipe-start/recipe-start.component';
-import { RecipeEditComponent } from './recipes/recipe-edit/recipe-edit.component';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { AuthComponent } from './auth/auth.component';
-import { LoadingSpinnerComponent } from './shared/loading-spinner/loading-spinner.component';
-import { AuthInterceptorService } from './auth/auth-interceptor.service';
-import { AlertComponent } from './shared/alert/alert.component';
+import { HttpClientModule } from '@angular/common/http';
+//import { RecipesModule } from './recipes/recipes.module';
+import { ShoppingListModule } from './shopping-list/shopping-list.module';
+import { SharedModule } from './shared/shared.module';
+import { CoreModule } from './core.module';
+import { AuthModule } from './auth/auth.module';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
-    RecipesComponent,
-    RecipeListComponent,
-    RecipeDetailComponent,
-    RecipeItemComponent,
-    ShoppingListComponent,
-    ShoppingEditComponent,
-    DropdownDirective,
-    RecipeStartComponent,
-    RecipeEditComponent,
-    AuthComponent,
-    LoadingSpinnerComponent,
-    AlertComponent
   ],
+  /**
+   * Be aware that in here we are importing our RecipesModule and all the elements that we declared
+   * in the exports[] array
+   * 
+   * The imports array in NgModule is there for Angular to add features of other NgModules into 
+   * this NgModule
+   */
   imports: [
     BrowserModule,
-    FormsModule,
-    ReactiveFormsModule,
     AppRoutingModule,
-    HttpClientModule
-  ],
-  providers: [
-    ShoppingListService, 
-    RecipeService, 
-    ResolverService, 
+    HttpClientModule,
     /**
-     * We tell angular that we are using an interceptor
-     * useClass -> The interceptor's class
-     * multi -> If we want to use multiple interceptors
+     * Be aware that we can not define the RecipeModule here because we are loading it lazily which means
+     * that we are trying to load it on demand so we wouldn't want to load that from the beginning so
+     * we should not have it in here
      */
-    {
-      provide: HTTP_INTERCEPTORS, 
-      useClass:AuthInterceptorService, 
-      multi: true
-    }
+    //RecipesModule,
+    ShoppingListModule,
+    /**
+     * We import the SharedModule here because we are using the dropdown directive in the header component
+     */
+    SharedModule,
+    /**
+     * The idea of this module is to simply provide all the services that are application wide inside
+     * of this module and the simply import that module
+     */
+    CoreModule,
+    AuthModule
+    
   ],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
