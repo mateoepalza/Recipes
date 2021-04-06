@@ -6,10 +6,10 @@ import { HeaderComponent } from './header/header.component';
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 //import { RecipesModule } from './recipes/recipes.module';
-import { ShoppingListModule } from './shopping-list/shopping-list.module';
+//import { ShoppingListModule } from './shopping-list/shopping-list.module';
 import { SharedModule } from './shared/shared.module';
 import { CoreModule } from './core.module';
-import { AuthModule } from './auth/auth.module';
+//import { AuthModule } from './auth/auth.module';
 
 @NgModule({
   declarations: [
@@ -33,7 +33,10 @@ import { AuthModule } from './auth/auth.module';
      * we should not have it in here
      */
     //RecipesModule,
-    ShoppingListModule,
+    /**
+     * We delete the element because we are not loading it right away, we are using lazy loading
+     */
+    //ShoppingListModule,
     /**
      * We import the SharedModule here because we are using the dropdown directive in the header component
      */
@@ -43,7 +46,7 @@ import { AuthModule } from './auth/auth.module';
      * of this module and the simply import that module
      */
     CoreModule,
-    AuthModule
+    //AuthModule
     
   ],
   providers: [],

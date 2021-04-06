@@ -1,5 +1,5 @@
 import { NgModule } from "@angular/core";
-import { RouterModule } from "@angular/router";
+import { PreloadAllModules, RouterModule } from "@angular/router";
 
 const routes = [
     { path: '', redirectTo: '/recipes', pathMatch: 'full' },
@@ -23,6 +23,8 @@ const routes = [
      */
     // old approach
     { path: 'recipes', loadChildren: './recipes/recipes.module#RecipesModule'},
+    { path: 'shopping-list', loadChildren: './shopping-list/shopping-list.module#ShoppingListModule'},
+    { path: 'auth', loadChildren: './auth/auth.module#AuthModule' }
 
     // new approach -> i don't use it because we have to activate a flag
     /*{
@@ -30,11 +32,19 @@ const routes = [
         loadChildren: () => import('./recipes/recipes.module').then(m => m.RecipesModule)
     }*/
 ];
-
 @NgModule({
-    imports: [RouterModule.forRoot(routes)],
+    /**
+     * preloadAllModules => with this, we are telling angular that generally we are using lazy loading,
+     *                      so it will not put all that code into one bundle, it will split it ,but it will
+     *                      preload the bundles as soon as possible.
+     * 
+     * => So basically in this application this will load a first bundle that will be really small (so the
+     *    initial loading phase is fast) but then when the user is browsing the page and we have some idle
+     *    time anways, then we preload these additional code bundles to make sure that subsequent navigation
+     *    requests are faster, so we are getting the best of both worlds, a fast initial load and thereafter
+     *    , fast subsequents loads
+     */
+    imports: [RouterModule.forRoot(routes, {preloadingStrategy: PreloadAllModules})],
     exports: [RouterModule]
 })
-export class AppRoutingModule {
-
-}
+export class AppRoutingModule {}
