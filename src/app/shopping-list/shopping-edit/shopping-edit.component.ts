@@ -6,6 +6,7 @@ import {
 } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Subscription } from 'rxjs';
+import { LogginService } from 'src/app/loggin.service';
 
 import { Ingredient } from '../../shared/ingredient.model';
 import { ShoppingListService } from '../shopping-list.service';
@@ -30,7 +31,7 @@ export class ShoppingEditComponent implements OnInit, OnDestroy {
    */
   subscription: Subscription;
 
-  constructor(private shoppingListService: ShoppingListService) { }
+  constructor(private shoppingListService: ShoppingListService, private logginService: LogginService) { }
 
   ngOnInit() {
 
@@ -52,6 +53,9 @@ export class ShoppingEditComponent implements OnInit, OnDestroy {
         'amount': this.editedItem.amount
       })
     });
+    
+    
+    this.logginService.printLog("Hello from shopping-listComponent ngOnInit");
   }
 
   onAddItem() {

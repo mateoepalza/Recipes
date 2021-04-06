@@ -1,6 +1,7 @@
 import { HTTP_INTERCEPTORS } from "@angular/common/http";
 import { NgModule } from "@angular/core";
 import { AuthInterceptorService } from "./auth/auth-interceptor.service";
+//import { LogginService } from "./loggin.service";
 import { ResolverService } from "./recipes/recipe-detail/resolver.service";
 import { RecipeService } from "./recipes/recipe.service";
 import { ShoppingListService } from "./shopping-list/shopping-list.service";
@@ -31,6 +32,7 @@ import { ShoppingListService } from "./shopping-list/shopping-list.service";
             useClass: AuthInterceptorService,
             multi: true
         }
+        //LogginService
     ]
 })
 export class CoreModule {

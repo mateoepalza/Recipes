@@ -1,5 +1,6 @@
 import { NgModule } from "@angular/core";
 import { FormsModule } from "@angular/forms";
+import { LogginService } from "../loggin.service";
 import { SharedModule } from "../shared/shared.module";
 
 import { ShoppingEditComponent } from "./shopping-edit/shopping-edit.component";
@@ -16,7 +17,10 @@ import { ShoppingListComponent } from "./shopping-list.component";
         ShoppingListRoutingModule,
         SharedModule
     ],
-    exports: []
+    exports: [],
+    providers: [
+        //LogginService
+    ]
 })
 export class ShoppingListModule {
 

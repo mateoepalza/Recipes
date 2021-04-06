@@ -41,7 +41,7 @@
                     -->
                     <div class="row d-flex flex-row align-items-end" 
                         style="display: flex; flex-flow:row nowrap; align-items: flex-end; margin-bottom: 25px; " 
-                        *ngFor="ingredient of formRecipeEdit.get('ingredients').controls; let i = index" 
+                        *ngFor="ingredient of ingredientsControls; let i = index" 
                         [formGroupName]="i">
                         <div class="col-xs-8" >
                             <div>

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthInterceptorService } from './auth/auth-interceptor.service';
 import { AuthService } from './auth/auth.service';
+import { LogginService } from './loggin.service';
 
 @Component({
   selector: 'app-root',
@@ -10,7 +11,7 @@ import { AuthService } from './auth/auth.service';
 export class AppComponent implements OnInit{
   
   
-  constructor(private authService: AuthService){
+  constructor(private authService: AuthService, private logginService: LogginService){
   }
 
   ngOnInit(){
@@ -19,5 +20,6 @@ export class AppComponent implements OnInit{
      * a current token activated, if that's the case we are going to autologin
      */
     this.authService.autoLogin();
+    this.logginService.printLog("Hello from AppComponent ngOnInit");
   }
 }

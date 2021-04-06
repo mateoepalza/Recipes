@@ -9,6 +9,7 @@ import { HttpClientModule } from '@angular/common/http';
 //import { ShoppingListModule } from './shopping-list/shopping-list.module';
 import { SharedModule } from './shared/shared.module';
 import { CoreModule } from './core.module';
+import { LogginService } from './loggin.service';
 //import { AuthModule } from './auth/auth.module';
 
 @NgModule({
@@ -49,7 +50,9 @@ import { CoreModule } from './core.module';
     //AuthModule
     
   ],
-  providers: [],
+  providers: [
+    //LogginService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
